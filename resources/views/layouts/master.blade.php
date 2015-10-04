@@ -49,5 +49,11 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+    @if ( Config::get('app.debug') )
+      <script type="text/javascript">
+      document.write('<script src="//{{$_SERVER['SERVER_NAME']}}:35729/livereload.js?snipver=1" type="text/javascript"><\/script>')
+      </script>
+    @endif
   </body>
 </html>
