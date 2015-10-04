@@ -11,13 +11,16 @@
 |
 */
 
-Route::pattern('provider', 'github');
+Route::pattern('provider', 'github|twitter|facebook');
 
 Route::get('/', function()
 {
     if (!\Auth::check()) {
         // ログイン済でなければリダイレクト
-        return 'こんにちは ゲストさん. ' . link_to('github/ahthorize', 'Github でログイン.');
+        return 'こんにちは ゲストさん. '
+        . link_to('github/authorize', 'Github でログイン.')
+        . link_to('twitter/authorize', 'Twitter でログイン.')
+        . link_to('facebook/authorize', 'Facebook でログイン.');
     }
     return 'ようこそ ' . \Auth::user()->name . 'さん!';
 });
@@ -43,10 +46,12 @@ Route::get('{provider}/login', function($provider)
     return redirect('/');
 });
 
-Route::group(['prefix' => 'messages'], function () {
+Route::group(['middleware' => 'auth'], function () {
+  Route::group(['prefix' => 'messages'], function () {
     Route::get('/', ['as' => 'messages', 'uses' => 'MessagesController@index']);
     Route::get('create', ['as' => 'messages.create', 'uses' => 'MessagesController@create']);
     Route::post('/', ['as' => 'messages.store', 'uses' => 'MessagesController@store']);
     Route::get('{id}', ['as' => 'messages.show', 'uses' => 'MessagesController@show']);
     Route::put('{id}', ['as' => 'messages.update', 'uses' => 'MessagesController@update']);
+  });
 });
