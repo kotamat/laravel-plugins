@@ -11,8 +11,36 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::pattern('provider', 'github');
+
+Route::get('/', function()
+{
+    if (!\Auth::check()) {
+        // ログイン済でなければリダイレクト
+        return 'こんにちは ゲストさん. ' . link_to('github/ahthorize', 'Github でログイン.');
+    }
+    return 'ようこそ ' . \Auth::user()->name . 'さん!';
+});
+
+Route::get('{provider}/authorize', function($provider)
+{
+    // ソーシャルログイン処理
+    return \Socialite::with($provider)->redirect();
+});
+
+Route::get('{provider}/login', function($provider)
+{
+    // ユーザー情報取得
+    $userData = \Socialite::with($provider)->user();
+    // ユーザー作成
+    $user = App\Models\User::firstOrCreate([
+            'name' => $userData->nickname,
+            'email'    => $userData->email,
+            'avatar'   => $userData->avatar
+    ]);
+    \Auth::login($user);
+
+    return redirect('/');
 });
 
 Route::group(['prefix' => 'messages'], function () {
