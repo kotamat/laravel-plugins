@@ -1,4 +1,5 @@
 var elixir = require('laravel-elixir');
+var gulp = require('gulp');
 
 require('laravel-elixir-livereload');
 /*
@@ -15,6 +16,29 @@ require('laravel-elixir-livereload');
 elixir(function(mix) {
   mix.livereload();
 })
+
+//semantic
 elixir(function(mix) {
-    mix.sass('app.scss');
+
+ mix
+     .copy('bower_components/semantic/dist/semantic.js', 'public/assets/js/semantic.js')
+     .copy('bower_components/semantic/dist/semantic.css', 'public/assets/css/semantic.css')
+     .sass([
+        'app.scss',
+     ], 'public/css')
+     .version([
+        'public/css/app.css',
+        'public/assets/js/semantic.js',
+        'public/assets/css/semantic.css',
+     ])
+ ;
+
+});
+
+gulp.task('fonts', function() {
+ gulp.src(['bower_components/semantic/dist/themes/default/assets/fonts/**/*'])
+     .pipe(gulp.dest('public/build/assets/css/themes/default/assets/fonts'));
+
+ gulp.src(['bower_components/fontawesome/fonts/**/*'])
+     .pipe(gulp.dest('public/build/assets/css/fonts'));
 });

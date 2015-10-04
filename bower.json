@@ -1,0 +1,18 @@
+{
+  "name": "Laravel",
+  "version": "0.0.0",
+  "homepage": "https://github.com/kotamat/laravel-plugins",
+  "description": "laravel bower for startups",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "fontawesome": "~4.4.0",
+    "semantic": "~2.1.4"
+  }
+}
