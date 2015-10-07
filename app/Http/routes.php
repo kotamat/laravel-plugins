@@ -55,3 +55,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::put('{id}', ['as' => 'messages.update', 'uses' => 'MessagesController@update']);
   });
 });
+
+
+Route::group(['prefix' => 'excel'], function() {
+    Route::get('/', ['as' => 'excel', 'uses' => 'ExcelController@index']);
+    Route::get('create', ['as' => 'excel.create', 'uses' => 'ExcelController@create']);
+});
