@@ -31,7 +31,7 @@
       {!! Html::link('messages', 'Message', ['class' => 'item']) !!}
       {!! Html::link('messages/create', 'New Message', ['class' => 'item']) !!}
     </div>
-    <div class="container">
+    <div class="ui container">
         @yield('content')
     </div>
 
