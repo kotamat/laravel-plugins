@@ -7,8 +7,8 @@
     <title>Packages</title>
 
     <!-- Bootstrap -->
-    {!! Html::style('assets/css/semantic.css') !!}
-    {!! Html::script('assets/js/semantic.js') !!}
+    {!! Html::style(elixir('assets/css/semantic.css')) !!}
+    {!! Html::script(elixir('assets/js/semantic.js')) !!}
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->

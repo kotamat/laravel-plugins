@@ -21,15 +21,15 @@ elixir(function(mix) {
 elixir(function(mix) {
 
  mix
-     .copy('bower_components/semantic/dist/semantic.js', 'public/assets/js/semantic.js')
-     .copy('bower_components/semantic/dist/semantic.css', 'public/assets/css/semantic.css')
+     .copy('bower_components/semantic/dist/semantic.min.js', 'public/assets/js/semantic.min.js')
+     .copy('bower_components/semantic/dist/semantic.min.css', 'public/assets/css/semantic.min.css')
      .sass([
         'app.scss',
      ], 'public/css')
      .version([
         'public/css/app.css',
-        'public/assets/js/semantic.js',
-        'public/assets/css/semantic.css',
+        'public/assets/js/semantic.min.js',
+        'public/assets/css/semantic.min.css',
      ])
  ;
 

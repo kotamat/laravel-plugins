@@ -6,6 +6,7 @@ theme.config
 semantic.json
 tasks/**/oauth.js
 vendor/
+/dist/
 
 # Numerous always-ignore extensions
 *.diff
