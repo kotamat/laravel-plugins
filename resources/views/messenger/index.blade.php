@@ -8,13 +8,28 @@
     @endif
     @if($threads->count() > 0)
         @foreach($threads as $thread)
-        <?php $class = $thread->isUnread($currentUserId) ? 'alert-info' : ''; ?>
-        <div class="media alert {!!$class!!}">
-            <h4 class="media-heading">{!! link_to('messages/' . $thread->id, $thread->subject) !!}</h4>
-            <p>{!! $thread->latestMessage->body !!}</p>
-            <p><small><strong>Creator:</strong> {!! $thread->creator()->name !!}</small></p>
-            <p><small><strong>Participants:</strong> {!! $thread->participantsString(Auth::id()) !!}</small></p>
+
+        <div class="ui card">
+          <div class="content">
+            {!! link_to('messages/' . $thread->id, $thread->subject) !!}
+          </div>
+          <div class="image">
+            <img src="" alt="" class="ui wireframe image">
+          </div>
+          <div class="content">
+            <a href="" class="header"></a>
+            <div class="meta">
+              {!! $thread->creator()->name !!}
+            </div>
+            <div class="description">
+              {!! $thread->latestMessage->body !!}
+            </div>
+            <div class="summary">
+              {!! $thread->participantsString(Auth::id()) !!}
+            </div>
+          </div>
         </div>
+
         @endforeach
     @else
         <p>Sorry, no threads.</p>

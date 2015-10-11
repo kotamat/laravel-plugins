@@ -1,41 +1,51 @@
 @extends('layouts.master')
 
 @section('content')
-    <div class="col-md-6">
-        <h1>{!! $thread->subject !!}</h1>
 
-        @foreach($thread->messages as $message)
-            <div class="media">
-                <a class="pull-left" href="#">
-                    <img src="//www.gravatar.com/avatar/{!! md5($message->user->email) !!}?s=64" alt="{!! $message->user->name !!}" class="img-circle">
-                </a>
-                <div class="media-body">
-                    <h5 class="media-heading">{!! $message->user->name !!}</h5>
-                    <p>{!! $message->body !!}</p>
-                    <div class="text-muted"><small>Posted {!! $message->created_at->diffForHumans() !!}</small></div>
-                </div>
-            </div>
-        @endforeach
-
-        <h2>Add a new message</h2>
-        {!! Form::open(['route' => ['messages.update', $thread->id], 'method' => 'PUT']) !!}
-        <!-- Message Form Input -->
-        <div class="form-group">
-            {!! Form::textarea('message', null, ['class' => 'form-control']) !!}
+  <div class="ui comments">
+    <h1 class="ui dividing header"></h1>
+    @foreach($thread->messages as $message)
+    <div class="comment">
+      <a href="" class="avatar">
+        <img src="//www.gravatar.com/avatar/{!! md5($message->user->email) !!}?s=64" alt="{!! $message->user->name !!}" class="img-circle">
+      </a>
+      <div class="content">
+        <a href="" class="author">
+          {{ $message->user->name }}
+        </a>
+        <div class="metadata">
+          <span class="date">
+            Posted {{ $message->created_at->diffForHumans() }}
+          </span>
         </div>
-
-        @if($users->count() > 0)
-        <div class="checkbox">
-            @foreach($users as $user)
-                <label title="{!! $user->name !!}"><input type="checkbox" name="recipients[]" value="{!! $user->id !!}">{!! $user->name !!}</label>
-            @endforeach
+        <div class="text">
+          {{ $message->body }}
         </div>
-        @endif
-
-        <!-- Submit Form Input -->
-        <div class="form-group">
-            {!! Form::submit('Submit', ['class' => 'btn btn-primary form-control']) !!}
+        <div class="actions">
+          <a href="" class="reply">Reply</a>
         </div>
-        {!! Form::close() !!}
+      </div>
     </div>
+    @endforeach
+    {!! Form::open(['route' => ['messages.update', $thread->id], 'method' => 'PUT', 'class' => 'ui reply form']) !!}
+      <div class="field">
+        {!! Form::textarea('message') !!}
+      </div>
+
+      @if($users->count() > 0)
+      @foreach($users as $user)
+      <div class="inline field">
+        <div class="ui checkbox">
+          {!! Form::checkbox('recipients[]', $user->id, null, ['id' => 'recipient_'. $user->id ]) !!}
+          {!! Form::label('recipient_'. $user->id, $user->name) !!}
+        </div>
+      </div>
+        @endforeach
+      @endif
+
+      <button type="submit" class="ui blue labeled submit icon button">
+        <i class="icon edit"></i>
+      </button>
+    {!! Form::close() !!}
+  </div>
 @stop
