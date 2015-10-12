@@ -24,6 +24,22 @@ class AuthController extends Controller
 
     use AuthenticatesAndRegistersUsers, ThrottlesLogins;
 
+    protected $redirectPath = '/';
+
+    public function providerLogin($provider)
+    {
+      // ユーザー情報取得
+      $userData = \Socialite::with($provider)->user();
+      // ユーザー作成
+      $user = App\Models\User::firstOrCreate([
+        'name' => $userData->nickname,
+        'email'    => $userData->email,
+        'avatar'   => $userData->avatar
+        ]);
+        \Auth::login($user);
+
+        return redirect('/');
+      }
     /**
      * Redirect the user to the GitHub authentication page.
      *

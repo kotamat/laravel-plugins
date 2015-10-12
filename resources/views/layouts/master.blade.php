@@ -5,10 +5,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Packages</title>
-    
+
 
     <!-- Bootstrap -->
     {!! Html::style(elixir('assets/css/semantic.min.css')) !!}
+    {!! Html::style(elixir('css/app.css')) !!}
     {!! Html::script(elixir('assets/js/semantic.min.js')) !!}
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->

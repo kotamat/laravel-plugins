@@ -1,1 +1,1 @@
-{"version":3,"sources":["app.css"],"names":[],"mappings":"AAAA","file":"app.css","sourceRoot":"/source/","sourcesContent":[]}
+{"version":3,"sources":["app.scss"],"names":[],"mappings":"AAAA;EACE,0BAA0B,EADtB;;AAGC;EACL,aAAa,EADD;;AAGd;EACE,mBAAmB,EADb;;AAGR;EACE,iBAAiB,EADV","file":"app.css","sourcesContent":["body {\n  background-color: #DADADA;\n}\nbody > .grid {\n  height: 100%;\n}\n.image {\n  margin-top: -100px;\n}\n.column {\n  max-width: 450px;\n}\n// @import \"node_modules/bootstrap-sass/assets/stylesheets/bootstrap\";\n"],"sourceRoot":"/source/"}

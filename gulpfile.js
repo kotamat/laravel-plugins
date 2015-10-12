@@ -23,6 +23,7 @@ elixir(function(mix) {
  mix
      .copy('bower_components/semantic/dist/semantic.min.js', 'public/assets/js/semantic.min.js')
      .copy('bower_components/semantic/dist/semantic.min.css', 'public/assets/css/semantic.min.css')
+     .copy('bower_components/semantic/examples/assets/images/', 'public/assets/images/')
      .sass([
         'app.scss',
      ], 'public/css')

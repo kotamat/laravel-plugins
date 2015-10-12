@@ -11,7 +11,20 @@
 |
 */
 
-Route::pattern('provider', 'github|twitter|facebook');
+Route::group(['prefix' => 'auth'], function() {
+  Route::pattern('provider', 'github|twitter|facebook');
+  Route::get('{provider}/authorize', function($provider)
+  {
+    // ソーシャルログイン処理
+    return \Socialite::with($provider)->redirect();
+  });
+
+  Route::get('{provider}/login', 'Auth\AuthController@providerLogin');
+  Route::controllers([
+    '/' => 'Auth\AuthController',
+    'password' => 'Auth\PasswordController'
+  ]);
+});
 
 Route::get('/', function()
 {
@@ -25,26 +38,6 @@ Route::get('/', function()
     return 'ようこそ ' . \Auth::user()->name . 'さん!';
 });
 
-Route::get('{provider}/authorize', function($provider)
-{
-    // ソーシャルログイン処理
-    return \Socialite::with($provider)->redirect();
-});
-
-Route::get('{provider}/login', function($provider)
-{
-    // ユーザー情報取得
-    $userData = \Socialite::with($provider)->user();
-    // ユーザー作成
-    $user = App\Models\User::firstOrCreate([
-            'name' => $userData->nickname,
-            'email'    => $userData->email,
-            'avatar'   => $userData->avatar
-    ]);
-    \Auth::login($user);
-
-    return redirect('/');
-});
 
 Route::group(['middleware' => 'auth'], function () {
   Route::group(['prefix' => 'messages'], function () {
