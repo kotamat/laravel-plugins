@@ -79,7 +79,7 @@ return [
     |
     */
 
-    'key' => env('APP_KEY', 'SomeRandomString'),
+    'key' => env('APP_KEY', $_SERVER['APP_KEY']),
 
     'cipher' => 'AES-256-CBC',
 
