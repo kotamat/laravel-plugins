@@ -26,7 +26,7 @@ return [
     |
     */
 
-    'default' => env('DB_CONNECTION', 'mysql'),
+    'default' => env('DB_CONNECTION', 'eb-mysql'),
 
     /*
     |--------------------------------------------------------------------------
@@ -50,6 +50,18 @@ return [
             'driver'   => 'sqlite',
             'database' => database_path('database.sqlite'),
             'prefix'   => '',
+        ],
+
+        'eb-mysql' => [
+            'driver'    => 'mysql',
+            'host'      => $_SERVER['DB_HOST'],
+            'database'  => $_SERVER['DB_DATABASE'],
+            'username'  => $_SERVER['DB_USERNAME'],
+            'password'  => $_SERVER['DB_PASSWORD'],
+            'charset'   => 'utf8',
+            'collation' => 'utf8_unicode_ci',
+            'prefix'    => '',
+            'strict'    => false,
         ],
 
         'mysql' => [
